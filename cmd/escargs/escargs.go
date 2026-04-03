@@ -10,7 +10,7 @@ import (
 	"log"
 	"os"
 
-	"al.essio.dev/pkg/shellescape"
+	"github.cmo/qr243vbi/cmdescape"
 )
 
 var (
