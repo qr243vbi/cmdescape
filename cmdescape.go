@@ -13,7 +13,6 @@ be appended to/used in the context of cmd programs' command line arguments.
 
 import (
 	"bytes"
-	"regexp"
 	"strings"
 	"unicode"
 )
@@ -39,7 +38,7 @@ func Quote(s string) string {
     // Escape % (batch variable expansion)
     s = strings.ReplaceAll(s, "%", "^^^%")
 
-	return '"' + s + '"'
+	return "\"" + s + "\""
 }
 
 // QuoteCommand returns a shell-escaped version of the slice of strings.
