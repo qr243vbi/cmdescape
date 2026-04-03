@@ -1,17 +1,14 @@
 /*
-Package shellescape provides the shellescape.Quote to escape arbitrary
-strings for a safe use as command line arguments in the most common
-POSIX shells.
+Package cmdescape provides the cmdescape.Quote to escape arbitrary
+strings for a safe use as command line arguments in the Windows Console.
 
-The original Python package which this work was inspired by can be found
-at https://pypi.python.org/pypi/shellescape.
 */
 package cmdescape
 
 /*
-The functionality provided by shellescape.Quote could be helpful
+The functionality provided by cmdescape.Quote could be helpful
 in those cases where it is known that the output of a Go program will
-be appended to/used in the context of shell programs' command line arguments.
+be appended to/used in the context of cmd programs' command line arguments.
 */
 
 import (
