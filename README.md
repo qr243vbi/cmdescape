@@ -1,4 +1,4 @@
-# shellescape
+# cmdescape
 
 ![Build](https://github.com/qr243vbi/cmdescape/workflows/Build/badge.svg)
 [![GoDoc](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white&style=flat-square)](https://pkg.go.dev/github.com/qr243vbi/cmdescape?tab=overview)
