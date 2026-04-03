@@ -6,7 +6,7 @@ POSIX shells.
 The original Python package which this work was inspired by can be found
 at https://pypi.python.org/pypi/shellescape.
 */
-package shellescape // "import al.essio.dev/pkg/shellescape"
+package cmdescape
 
 /*
 The functionality provided by shellescape.Quote could be helpful
@@ -21,24 +21,28 @@ import (
 	"unicode"
 )
 
-var pattern *regexp.Regexp
-
-func init() {
-	pattern = regexp.MustCompile(`[^\w@%+=:,./-]`)
-}
-
-// Quote returns a shell-escaped version of the string s. The returned value
+// Quote returns a cnd-escaped version of the string s. The returned value
 // is a string that can safely be used as one token in a shell command line.
 func Quote(s string) string {
-	if len(s) == 0 {
-		return "''"
-	}
 
-	if pattern.MatchString(s) {
-		return "'" + strings.ReplaceAll(s, "'", "'\"'\"'") + "'"
-	}
+    // Order matters: escape ^ first to avoid double‑escaping
+    s = strings.ReplaceAll(s, "^", "^^")
 
-	return s
+    // Escape "
+    s = strings.ReplaceAll(s, `"`, `\"`)
+
+    // Escape other CMD special characters
+    s = strings.ReplaceAll(s, "&", "^&")
+    s = strings.ReplaceAll(s, "|", "^|")
+    s = strings.ReplaceAll(s, "<", "^<")
+    s = strings.ReplaceAll(s, ">", "^>")
+    s = strings.ReplaceAll(s, "(", "^(")
+    s = strings.ReplaceAll(s, ")", "^)")
+
+    // Escape % (batch variable expansion)
+    s = strings.ReplaceAll(s, "%", "^^^%")
+
+	return '"' + s + '"'
 }
 
 // QuoteCommand returns a shell-escaped version of the slice of strings.
@@ -61,7 +65,6 @@ func StripUnsafe(s string) string {
 		if unicode.IsPrint(r) {
 			return r
 		}
-
 		return -1
 	}, s)
 }
@@ -72,7 +75,6 @@ func StripSpaces(s string) string {
 		if !unicode.IsSpace(r) {
 			return r
 		}
-
 		return -1
 	}, s)
 }
