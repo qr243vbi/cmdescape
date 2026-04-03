@@ -62,7 +62,7 @@ func main() {
 	}
 
 	if nullSeparator {
-		scanner.Split(shellescape.ScanTokens)
+		scanner.Split(cmdescape.ScanTokens)
 	}
 
 	for scanner.Scan() {
@@ -77,7 +77,7 @@ func main() {
 			fmt.Printf(" ")
 		}
 
-		fmt.Printf("%s", shellescape.Quote(line))
+		fmt.Printf("%s", cmdescape.Quote(line))
 	}
 }
 
