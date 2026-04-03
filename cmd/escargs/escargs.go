@@ -10,7 +10,7 @@ import (
 	"log"
 	"os"
 
-	"github.cmo/qr243vbi/cmdescape"
+	"github.com/qr243vbi/cmdescape"
 )
 
 var (
